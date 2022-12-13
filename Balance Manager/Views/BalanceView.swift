@@ -15,7 +15,7 @@ struct BalanceView: View {
         AdditionModel(subject: "Me", date: .now, amount: -500, isLocked: false),
         AdditionModel(subject: "Jacob", date: .now, amount: -400, isLocked: false),
         AdditionModel(subject: "Me", date: .now, amount: 300, isLocked: false),
-        AdditionModel(subject: "Jacob", date: .now, amount: -200, isLocked: false),
+        AdditionModel(subject: "Jacob", date: .now, amount: -950000, isLocked: false),
     ]
     
     var body: some View {
