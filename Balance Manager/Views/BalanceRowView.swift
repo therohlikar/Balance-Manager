@@ -10,17 +10,23 @@ import SwiftUI
 struct BalanceRowView: View {
     
     var currentAddition: AdditionModel
+    @State var isShowingDetail: Bool = false
     
     var body: some View {
         HStack{
             HStack{
                 Text(currentAddition.subject)
+                    .fontWeight(currentAddition.isLocked ? .bold : .regular)
                 Image(systemName: "ellipsis.circle")
                     .font(.caption)
                     .foregroundColor(.blue)
             }
+            
+            .sheet(isPresented: $isShowingDetail, content: {
+                BalanceRowDetailView(currentAddition: currentAddition)
+            })
             .onTapGesture {
-                print(currentAddition.amount)
+                isShowingDetail.toggle()
             }
 
             Spacer()
@@ -28,7 +34,7 @@ struct BalanceRowView: View {
             VStack(alignment: .trailing){
                 
                 Text("\(currentAddition.amount)")
-                    .foregroundColor(currentAddition.amount > 0 ? .green : .red)
+                    .foregroundColor(currentAddition.isNegative ? .red : .green)
                     .bold()
                 
                 Text("CZK")
@@ -42,6 +48,6 @@ struct BalanceRowView: View {
 
 struct BalanceRowView_Previews: PreviewProvider {
     static var previews: some View {
-        BalanceRowView(currentAddition: AdditionModel(subject: "Test", date: .now, amount: 500, isLocked: false))
+        BalanceRowView(currentAddition: AdditionModel(subject: "Test", date: .now, amount: 500, isLocked: false, isNegative: false))
     }
 }

@@ -8,10 +8,16 @@
 import SwiftUI
 
 struct FinalizedBalanceView: View {
+    @EnvironmentObject var balanceViewModel: BalanceViewModel
+    @State var isCreatingNew: Bool = false
+
+    @State var isNegative:Bool = false
+    
     var body: some View {
         HStack(alignment: .center){
             Button {
-                
+                isNegative = true
+                isCreatingNew.toggle()
             } label: {
                 Image(systemName: "minus.circle")
                     .tint(.red)
@@ -19,7 +25,7 @@ struct FinalizedBalanceView: View {
             
             
             VStack{
-                Text("5 123")
+                Text("\(balanceViewModel.finalBalance)")
                     .bold()
                 Text("CZK")
                     .font(.caption2)
@@ -28,13 +34,17 @@ struct FinalizedBalanceView: View {
             
             
             Button {
-                
+                isNegative = false
+                isCreatingNew.toggle()
             } label: {
                 Image(systemName: "plus.circle")
                     .tint(.green)
             }
         }
         .font(.title)
+        .sheet(isPresented: $isCreatingNew, content: {
+            BalanceRowDetailView(currentAddition: AdditionModel(subject: "", date: .now, amount: 0, isLocked: false, isNegative: isNegative))
+        })
     }
 }
 

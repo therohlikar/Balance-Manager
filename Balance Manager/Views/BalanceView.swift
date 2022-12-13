@@ -9,31 +9,45 @@ import SwiftUI
 
 struct BalanceView: View {
     
-    private var additions: [AdditionModel] = [
-        AdditionModel(subject: "asdfdghsfhghjkghjk", date: .now, amount: 100, isLocked: false),
-        AdditionModel(subject: "Sex work", date: .now, amount: -600, isLocked: false),
-        AdditionModel(subject: "Me", date: .now, amount: -500, isLocked: false),
-        AdditionModel(subject: "Jacob", date: .now, amount: -400, isLocked: false),
-        AdditionModel(subject: "Me", date: .now, amount: 300, isLocked: false),
-        AdditionModel(subject: "Jacob", date: .now, amount: -950000, isLocked: false),
-    ]
-    
+    @EnvironmentObject var balanceViewModel: BalanceViewModel
     var body: some View {
         VStack{
             List{
-                ForEach(additions){ addition in
+                ForEach(balanceViewModel.additions){ addition in
                     BalanceRowView(currentAddition: addition)
+                    .swipeActions(edge: .trailing) {
+                        Button {
+                            balanceViewModel.deleteAddition(addition: addition)
+                        } label: {
+                            Image(systemName: "trash")
+                        }
+                        .tint(.red)
+                    }
+                    
+                    .swipeActions(edge: .leading) {
+                        Button {
+                            balanceViewModel.updateAddition(addition: addition, newAddition: AdditionModel(subject: addition.subject, date: addition.date, amount: addition.amount, isLocked: !addition.isLocked, isNegative: addition.isNegative))
+                        } label: {
+                            Image(systemName: (addition.isLocked ? "lock.open" : "lock"))
+                        }
+                        .tint(.yellow)
+                    }
                 }
+                
             }
             .listStyle(.plain)
+            
             
             FinalizedBalanceView()
         }
     }
+    
+    
 }
 
 struct BalanceView_Previews: PreviewProvider {
     static var previews: some View {
         BalanceView()
+            .environmentObject(BalanceViewModel())
     }
 }
