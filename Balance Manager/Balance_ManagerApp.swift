@@ -11,7 +11,7 @@ import SwiftUI
 struct Balance_ManagerApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            BalanceView()
         }
     }
 }
