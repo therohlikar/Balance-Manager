@@ -11,15 +11,14 @@ struct BalanceRowDetailView: View {
     @EnvironmentObject var balanceViewModel: BalanceViewModel
     @Environment(\.dismiss) var dismiss
     var currentAddition: AdditionModel
+    var new:Bool = false
     
     @State var subject: String = ""
     @State var date: Date = Date.now
     @State var amount: String = "0"
     @State var locked: Bool = false
-    @State var negative: Bool = false
     
-    let startingDate: Date = Calendar.current.date(from: DateComponents(year: 2022)) ?? Date()
-    let endingDate: Date = Date()
+    @FocusState var amountFocused: Bool
     
 //    var dateFormatter: DateFormatter{
 //        let formatter = DateFormatter()
@@ -32,11 +31,13 @@ struct BalanceRowDetailView: View {
     
     var body: some View {
         VStack{
-            RoundedRectangle(cornerRadius: 30)
-                .frame(width: 80, height: 5)
-                .foregroundColor(.white.opacity(0.5))
-                .padding(.bottom, 15)
-                .padding(.top, 5)
+            if !new {
+                RoundedRectangle(cornerRadius: 30)
+                    .frame(width: 80, height: 5)
+                    .foregroundColor(.white.opacity(0.5))
+                    .padding(.bottom, 15)
+                    .padding(.top, 5)
+            }
             
             VStack{
                 Text("Transaction ID")
@@ -49,75 +50,62 @@ struct BalanceRowDetailView: View {
             
             List{
                 VStack(alignment: .leading){
+                    VStack{
+                        TextField("Current: \(currentAddition.amount)", text: $amount)
+                            .multilineTextAlignment(.center)
+                            .keyboardType(.numbersAndPunctuation)
+                            .focused($amountFocused)
+                            .font(.largeTitle.weight(.bold))
+                            .textFieldStyle(.roundedBorder)
+                    }
+                    .padding(15)
+                    .font(.caption)
+                    .onAppear{
+                        amountFocused.toggle()
+                    }
+                }
+                .font(.largeTitle)
+            
+                VStack(alignment: .leading){
                     Text("What's the transaction about?")
                     
                     TextField("Current: \(currentAddition.subject)", text: $subject)
+                        .multilineTextAlignment(.center)
                 }
                 .padding(3)
                 
                 VStack(alignment: .leading){
-                    Text("When was the transaction?")
+                    Text("Date of transaction?")
                     
-                    DatePicker("", selection: $date, in: startingDate...endingDate, displayedComponents: .date)
-                        .datePickerStyle(.wheel)
-                        .labelsHidden()
-                        
-                }
-                .padding(3)
-                
-                VStack(alignment: .leading){
-                    
-                    HStack(alignment: .center){
+                    HStack{
                         Spacer()
-                        Image(systemName: "minus.circle")
-                            .foregroundColor(negative ? .red : .gray)
-                            .opacity(negative ? 1.0 : 0.2)
-                            .onTapGesture {
-                                negative = true
-                            }
-  
+                        DatePicker("", selection: $date, displayedComponents: .date)
+                            .datePickerStyle(.compact)
+                            .labelsHidden()
                         Spacer()
-                        
-                        VStack(alignment: .leading){
-                            Text("How much was the transaction?")
-                            
-                            TextField("Current: \(currentAddition.amount)", text: $amount)
-                                .keyboardType(.asciiCapableNumberPad)
-                        }
-                        .padding(15)
-                        .font(.caption)
-                        
-                        Image(systemName: "plus.circle")
-                            .foregroundColor(negative ? .gray : .green)
-                            .opacity(negative ? 0.2 : 1.0)
-                            .onTapGesture {
-                                negative = false
-                            }
                     }
-                    .font(.largeTitle)
                 }
                 .padding(3)
-                
-                
-                
-                VStack(alignment: .leading){
-                    Text("Do you want to lock the transaction from clearing?")
 
-                    Toggle("", isOn: $locked)
-                        .labelsHidden()
+                VStack(alignment: .leading){
+                    Text("Lock transaction?")
+
+                    HStack{
+                        Spacer()
+                        Toggle("", isOn: $locked)
+                            .labelsHidden()
+                        Spacer()
+                    }
                 }
                 .padding(3)
-                
-                
             }
-            .fontWeight(.regular)
-            .font(.caption)
+            .font(.caption.weight(.regular))
             .listStyle(.grouped)
             .cornerRadius(10)
             
             HStack{
                 Button {
-                    balanceViewModel.updateAddition(addition: currentAddition, newAddition: AdditionModel(subject: subject, date: date, amount: Int(amount) ?? 0, isLocked: locked, isNegative: negative))
+                    balanceViewModel.updateAddition(addition: currentAddition, newAddition: AdditionModel(subject: subject, date: date, amount: Int(amount) ?? 0, isLocked: locked))
                     
                     dismiss()
                 } label: {
@@ -152,16 +140,12 @@ struct BalanceRowDetailView: View {
             date = currentAddition.date
             amount = String(currentAddition.amount)
             locked = currentAddition.isLocked
-            print("OK \(currentAddition.isNegative)")
-            print("BEFORE \(negative)")
-            negative = currentAddition.isNegative
-            print("AFTER \(negative)")
         }
     }
 }
 
 struct BalanceRowDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        BalanceRowDetailView(currentAddition: AdditionModel(subject: "Test", date: .now, amount: 500, isLocked: false, isNegative: false))
+        BalanceRowDetailView(currentAddition: AdditionModel(subject: "Test", date: .now, amount: 500, isLocked: false))
     }
 }

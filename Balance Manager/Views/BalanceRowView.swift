@@ -21,20 +21,13 @@ struct BalanceRowView: View {
                     .font(.caption)
                     .foregroundColor(.blue)
             }
-            
-            .sheet(isPresented: $isShowingDetail, content: {
-                BalanceRowDetailView(currentAddition: currentAddition)
-            })
-            .onTapGesture {
-                isShowingDetail.toggle()
-            }
 
             Spacer()
             
             VStack(alignment: .trailing){
                 
                 Text("\(currentAddition.amount)")
-                    .foregroundColor(currentAddition.isNegative ? .red : .green)
+                    .foregroundColor(currentAddition.amount < 0 ? .red : .green)
                     .bold()
                 
                 Text("CZK")
@@ -42,12 +35,19 @@ struct BalanceRowView: View {
                 
             }
         }
+        .sheet(isPresented: $isShowingDetail, content: {
+            BalanceRowDetailView(currentAddition: currentAddition)
+        })
+        .onTapGesture {
+            isShowingDetail.toggle()
+        }
         .padding(5)
+        
     }
 }
 
 struct BalanceRowView_Previews: PreviewProvider {
     static var previews: some View {
-        BalanceRowView(currentAddition: AdditionModel(subject: "Test", date: .now, amount: 500, isLocked: false, isNegative: false))
+        BalanceRowView(currentAddition: AdditionModel(subject: "Test", date: .now, amount: 500, isLocked: false))
     }
 }

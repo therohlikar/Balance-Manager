@@ -10,8 +10,23 @@ import SwiftUI
 struct BalanceView: View {
     
     @EnvironmentObject var balanceViewModel: BalanceViewModel
+    
     var body: some View {
         VStack{
+            Picker("Test", selection: $balanceViewModel.currentSorting) {
+                Text("From Date")
+                    .tag(BalanceViewModel.SortAndFilter.dateFrom)
+                
+                Text("From Negatives")
+                    .tag(BalanceViewModel.SortAndFilter.fromLowest)
+                
+                Text("From Positives")
+                    .tag(BalanceViewModel.SortAndFilter.fromHighest)
+            }
+            .padding(.top)
+            .padding(.horizontal)
+            .pickerStyle(.segmented)
+            
             List{
                 ForEach(balanceViewModel.additions){ addition in
                     BalanceRowView(currentAddition: addition)
@@ -26,7 +41,7 @@ struct BalanceView: View {
                     
                     .swipeActions(edge: .leading) {
                         Button {
-                            balanceViewModel.updateAddition(addition: addition, newAddition: AdditionModel(subject: addition.subject, date: addition.date, amount: addition.amount, isLocked: !addition.isLocked, isNegative: addition.isNegative))
+                            balanceViewModel.updateAddition(addition: addition, newAddition: AdditionModel(subject: addition.subject, date: addition.date, amount: addition.amount, isLocked: !addition.isLocked))
                         } label: {
                             Image(systemName: (addition.isLocked ? "lock.open" : "lock"))
                         }

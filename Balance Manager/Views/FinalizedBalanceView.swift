@@ -11,39 +11,24 @@ struct FinalizedBalanceView: View {
     @EnvironmentObject var balanceViewModel: BalanceViewModel
     @State var isCreatingNew: Bool = false
 
-    @State var isNegative:Bool = false
-    
     var body: some View {
         HStack(alignment: .center){
-            Button {
-                isNegative = true
-                isCreatingNew.toggle()
-            } label: {
-                Image(systemName: "minus.circle")
-                    .tint(.red)
-            }
-            
-            
+
             VStack{
                 Text("\(balanceViewModel.finalBalance)")
                     .bold()
+                    .foregroundColor(balanceViewModel.finalBalance > 0 ? .green : .red)
                 Text("CZK")
                     .font(.caption2)
             }
-            .padding(.horizontal, 20)
-            
-            
-            Button {
-                isNegative = false
+            .onTapGesture {
                 isCreatingNew.toggle()
-            } label: {
-                Image(systemName: "plus.circle")
-                    .tint(.green)
             }
+            .padding(.horizontal, 20)
         }
         .font(.title)
-        .sheet(isPresented: $isCreatingNew, content: {
-            BalanceRowDetailView(currentAddition: AdditionModel(subject: "", date: .now, amount: 0, isLocked: false, isNegative: isNegative))
+        .fullScreenCover(isPresented: $isCreatingNew, content: {
+            BalanceRowDetailView(currentAddition: AdditionModel(subject: "Unnamed Payment", date: .now, amount: 0, isLocked: false), new: true)
         })
     }
 }
@@ -51,5 +36,6 @@ struct FinalizedBalanceView: View {
 struct FinalizedBalanceView_Previews: PreviewProvider {
     static var previews: some View {
         FinalizedBalanceView()
+            .environmentObject(BalanceViewModel())
     }
 }

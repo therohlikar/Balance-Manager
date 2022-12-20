@@ -13,18 +13,16 @@ struct AdditionModel: Identifiable, Codable{
     let date: Date
     let amount: Int
     let isLocked: Bool
-    let isNegative: Bool
     
-    init(id: String = UUID().uuidString, subject: String, date:Date, amount: Int, isLocked: Bool, isNegative: Bool){
+    init(id: String = UUID().uuidString, subject: String, date:Date, amount: Int, isLocked: Bool){
         self.id = id
         self.subject = subject
         self.date = date
         self.amount = amount
         self.isLocked = isLocked
-        self.isNegative = isNegative
     }
     
     func update(newAddition: AdditionModel) -> AdditionModel {
-        return AdditionModel(subject: newAddition.subject, date: newAddition.date, amount: newAddition.amount, isLocked: newAddition.isLocked, isNegative: newAddition.isNegative)
+        return AdditionModel(subject: newAddition.subject, date: newAddition.date, amount: newAddition.amount, isLocked: newAddition.isLocked)
     }
 }
