@@ -17,7 +17,7 @@ struct FinalizedBalanceView: View {
             VStack{
                 Text("\(balanceViewModel.finalBalance)")
                     .bold()
-                    .foregroundColor(balanceViewModel.finalBalance > 0 ? .green : .red)
+                    .foregroundColor(balanceViewModel.finalBalance < 0 ? .red : balanceViewModel.finalBalance > 0 ? .green : .white )
                 Text("CZK")
                     .font(.caption2)
             }

@@ -31,8 +31,8 @@ class BalanceViewModel:ObservableObject{
     let balanceKey:String = "additions_list"
 
     init(){
-        getAdditions()
-        //getAdditions_Test()
+        //getAdditions()
+        getAdditions_Test()
     }
     
     func getAdditions_Test(){
@@ -118,5 +118,10 @@ class BalanceViewModel:ObservableObject{
         }
         
         self.finalBalance = newBalance
+    }
+    
+    func clearAdditions(){
+        self.finalBalance = 0
+        self.additions = []
     }
 }
