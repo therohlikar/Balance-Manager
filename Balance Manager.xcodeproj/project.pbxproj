@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		962CC1002968895D00E1F4C2 /* ProfileSideMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 962CC0FF2968895D00E1F4C2 /* ProfileSideMenuView.swift */; };
+		962CC102296A0D0700E1F4C2 /* ProfileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 962CC101296A0D0700E1F4C2 /* ProfileModel.swift */; };
+		962CC104296A0D7200E1F4C2 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 962CC103296A0D7200E1F4C2 /* ProfileViewModel.swift */; };
 		96E3CC352948A053002348CE /* Balance_ManagerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96E3CC342948A053002348CE /* Balance_ManagerApp.swift */; };
 		96E3CC392948A055002348CE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 96E3CC382948A055002348CE /* Assets.xcassets */; };
 		96E3CC3C2948A055002348CE /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 96E3CC3B2948A055002348CE /* Preview Assets.xcassets */; };
@@ -19,6 +22,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		962CC0FF2968895D00E1F4C2 /* ProfileSideMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSideMenuView.swift; sourceTree = "<group>"; };
+		962CC101296A0D0700E1F4C2 /* ProfileModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileModel.swift; sourceTree = "<group>"; };
+		962CC103296A0D7200E1F4C2 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		96E3CC312948A053002348CE /* Balance Manager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Balance Manager.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		96E3CC342948A053002348CE /* Balance_ManagerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Balance_ManagerApp.swift; sourceTree = "<group>"; };
 		96E3CC382948A055002348CE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -86,6 +92,7 @@
 				96E3CC482948A8F6002348CE /* BalanceRowView.swift */,
 				96E3CC4A2948A9A3002348CE /* FinalizedBalanceView.swift */,
 				96E3CC4C2948B844002348CE /* BalanceRowDetailView.swift */,
+				962CC0FF2968895D00E1F4C2 /* ProfileSideMenuView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -94,6 +101,7 @@
 			isa = PBXGroup;
 			children = (
 				96E3CC462948A4DF002348CE /* AdditionModel.swift */,
+				962CC101296A0D0700E1F4C2 /* ProfileModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -102,6 +110,7 @@
 			isa = PBXGroup;
 			children = (
 				96E3CC4F2948C4BA002348CE /* BalanceViewModel.swift */,
+				962CC103296A0D7200E1F4C2 /* ProfileViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -176,8 +185,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				962CC102296A0D0700E1F4C2 /* ProfileModel.swift in Sources */,
 				96E3CC492948A8F6002348CE /* BalanceRowView.swift in Sources */,
 				96E3CC352948A053002348CE /* Balance_ManagerApp.swift in Sources */,
+				962CC104296A0D7200E1F4C2 /* ProfileViewModel.swift in Sources */,
+				962CC1002968895D00E1F4C2 /* ProfileSideMenuView.swift in Sources */,
 				96E3CC502948C4BA002348CE /* BalanceViewModel.swift in Sources */,
 				96E3CC4B2948A9A3002348CE /* FinalizedBalanceView.swift in Sources */,
 				96E3CC472948A4DF002348CE /* AdditionModel.swift in Sources */,
@@ -321,8 +333,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UIRequiresFullScreen = YES;
 				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleDarkContent;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -358,8 +369,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UIRequiresFullScreen = YES;
 				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleDarkContent;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

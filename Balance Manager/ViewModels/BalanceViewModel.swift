@@ -8,10 +8,17 @@
 import Foundation
 
 class BalanceViewModel:ObservableObject{
+    init(){
+        //getAdditions()
+        getAdditions_Test()
+    }
+    
     enum SortAndFilter{
         case dateFrom
         case fromLowest
         case fromHighest
+        case onlyNegative
+        case onlyPositive
     }
     
     @Published var additions: [AdditionModel] = [] {
@@ -30,11 +37,6 @@ class BalanceViewModel:ObservableObject{
     
     let balanceKey:String = "additions_list"
 
-    init(){
-        //getAdditions()
-        getAdditions_Test()
-    }
-    
     func getAdditions_Test(){
         let testAdditions: [AdditionModel] = [
             AdditionModel(subject: "One", date: .now, amount: 500, isLocked: false),
@@ -108,7 +110,27 @@ class BalanceViewModel:ObservableObject{
             self.additions.sort{
                 $0.amount > $1.amount
             }
+        default:
+            self.additions.sort{
+                $0.date > $1.date
+            }
         }
+    }
+    
+    func getCurrentAdditions() -> [AdditionModel]{
+        var tempAdditions: [AdditionModel] = self.additions
+        
+        if self.currentSorting == .onlyNegative {
+            tempAdditions = tempAdditions.filter{
+                $0.amount <= 0
+            }
+        }else if self.currentSorting == .onlyPositive {
+            tempAdditions = tempAdditions.filter{
+                $0.amount > 0
+            }
+        }
+        
+        return tempAdditions
     }
     
     func recalculateAdditions(){

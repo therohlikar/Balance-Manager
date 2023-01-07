@@ -11,11 +11,13 @@ import SwiftUI
 struct Balance_ManagerApp: App {
     
     @StateObject var balanceViewModel: BalanceViewModel = BalanceViewModel()
+    @StateObject var profileViewModel: ProfileViewModel = ProfileViewModel()
     
     var body: some Scene {
         WindowGroup {
             BalanceView()
                 .environmentObject(balanceViewModel)
+                .environmentObject(profileViewModel)
         }
     }
 }
