@@ -16,61 +16,34 @@ struct ProfileSideMenuView: View {
         ZStack{
             HStack{
                 VStack(alignment: .center){
-                    VStack{
-                        Image(systemName: "person.fill")
-                            .foregroundColor(.black)
-                            .font(.largeTitle)
-                            .cornerRadius(40)
-                            .background(
-                                RoundedRectangle(cornerRadius: 100)
-                                    .foregroundColor(Color("AccentColor"))
-                                    .frame(width: 60, height: 60)
-                            )
-                            .padding()
+                    
+                    NavigationLink(destination:{
+                        SelectProfileView(hasProfile: true)
+                    },label: {
+                        VStack{
+                            Image(systemName: "person.fill")
+                                .foregroundColor(.black)
+                                .font(.largeTitle)
+                                .cornerRadius(40)
+                                .background(
+                                    RoundedRectangle(cornerRadius: 100)
+                                        .foregroundColor(Color("AccentColor"))
+                                        .frame(width: 60, height: 60)
+                                )
+                                .padding()
 
-                        Text("\(profileViewModel.getCurrentProfile().nickname)'s Profile")
-                            .foregroundColor(Color("AccentColor"))
-                            .font(.title)
-                    }
-                    .opacity(0.85)
-                    .padding(.bottom, 25)
-                    
-                    Spacer()
-                    
-                    ScrollView{
-                        ForEach(profileViewModel.profiles){ profile in
-                            HStack{
-                                Image(systemName: "person.fill")
-                                    .foregroundColor(.black)
-                                    .font(.headline)
-                                    .cornerRadius(40)
-                                    .background(
-                                        RoundedRectangle(cornerRadius: 100)
-                                            .foregroundColor(Color("AccentColor"))
-                                            .frame(width: 30, height: 30)
-                                    )
-                                    .padding()
-                                
-                                Spacer()
-                                
-                                Text(profile.nickname.uppercased())
-                                    .foregroundColor(Color("AccentColor"))
-                                    .font(.headline)
-                                
-                                Spacer()
-                            }
-                            .opacity(0.85)
+                            Text("Michael's Profile")
+                                .foregroundColor(Color("AccentColor"))
+                                .font(.title)
                         }
-                    }
+                        .opacity(0.85)
+                        .padding(.bottom, 25)
+                        
+                        
+                    })
                     
                     Spacer()
                     
-                    Button("Create new profile ...")
-                    {
-                        profileBtn.toggle()
-                    }
-                    .foregroundColor(Color("AccentColor"))
-                    .font(.subheadline)
                 }
                 .padding(36)
                 .padding(.horizontal, 20)

@@ -35,7 +35,7 @@ class BalanceViewModel:ObservableObject{
         }
     }
     
-    let balanceKey:String = "additions_list"
+    var balanceKey:String = "additions_list"
 
     func getAdditions_Test(){
         let testAdditions: [AdditionModel] = [
