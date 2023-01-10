@@ -12,17 +12,19 @@ struct ProfileSideMenuView: View {
     @Binding var profileBtn: Bool
     @State var currentDragOffSetX: CGFloat = 0
     @EnvironmentObject var profileViewModel: ProfileViewModel
+    @Environment(\.dismiss) var dismiss
     
     @State private var showingClearAlert:Bool = false
     @State private var showingDeleteAlert:Bool = false
     @State private var deleteActive:Bool = false
+    @State private var showEditProfile:Bool = false
     
     var body: some View {
         ZStack{
             HStack{
                 VStack(alignment: .center){
-                    NavigationLink(destination:{
-                        SelectProfileView()
+                    Button(action:{
+                        dismiss()
                     },label: {
                         VStack{
                             Image(systemName: profileViewModel.getCurrentProfile().icon)
@@ -61,8 +63,16 @@ struct ProfileSideMenuView: View {
                             },
                             secondaryButton: .cancel()
                         )
+                    }.padding(.bottom, 10)
+                    
+                    Button {
+                        showEditProfile.toggle()
+                    } label: {
+                        Text("Edit current profile")
+                            .font(.headline)
                     }
                     
+
                     Spacer()
                     
                     NavigationLink(destination: SelectProfileView(), isActive: $deleteActive) {
@@ -127,5 +137,8 @@ struct ProfileSideMenuView: View {
             }
         }
         .navigationBarBackButtonHidden()
+        .fullScreenCover(isPresented: $showEditProfile, content: {
+            ProfileFormView(currentProfile: profileViewModel.getCurrentProfile())
+        })
     }
 }

@@ -147,5 +147,6 @@ struct BalanceRowDetailView: View {
 struct BalanceRowDetailView_Previews: PreviewProvider {
     static var previews: some View {
         BalanceRowDetailView(balanceViewModel: BalanceViewModel(profile: ProfileModel(nickname: "NONAME", icon: "person.fill")), currentAddition: AdditionModel(subject: "Test", date: .now, amount: 500, isLocked: false))
+            .preferredColorScheme(.dark)
     }
 }

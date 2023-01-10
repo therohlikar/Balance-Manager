@@ -13,7 +13,7 @@ struct SelectProfileView: View {
     @State var isCreatingNewProfile: Bool = false
     
     var body: some View {
-        NavigationView{
+        NavigationView {
             VStack{
                 if profileViewModel.profiles.count > 0 {
                     ScrollView{
@@ -48,7 +48,6 @@ struct SelectProfileView: View {
                                 .opacity(0.85)
                             }
                         }
-                        
                     }
                     .padding(.vertical, 40)
                 }else{
@@ -68,15 +67,15 @@ struct SelectProfileView: View {
                 }, label: {
                     Text("Create new profile")
                 })
-                
             }
+            
+            
         }
         .navigationBarBackButtonHidden()
         .fullScreenCover(isPresented: $isCreatingNewProfile, content: {
-            ProfileFormView()
+            ProfileFormView(currentProfile: ProfileModel(nickname: "", icon: "person.fill"))
         })
     }
-    
 }
 
 struct SelectProfileView_Previews: PreviewProvider {
