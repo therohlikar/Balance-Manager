@@ -25,12 +25,12 @@ struct BalanceView: View {
                     }
                     Spacer()
                     
-                    Button {
-                        
-                    } label: {
-                            Image(systemName: "ellipsis.circle")
-                            .font(.title)
-                    }
+//                    Button {
+//
+//                    } label: {
+//                            Image(systemName: "ellipsis.circle")
+//                            .font(.title)
+//                    }
                 }
                 .tint(Color("AccentColor"))
                 .padding(.horizontal, 20)
@@ -87,7 +87,7 @@ struct BalanceView: View {
             
             GeometryReader{ _ in
                 HStack{
-                    ProfileSideMenuView(profileBtn: $profileBtn)
+                    ProfileSideMenuView(balanceViewModel: balanceViewModel, profileBtn: $profileBtn)
                         .offset(x: profileBtn ? 0 : -UIScreen.main.bounds.width)
                         
                     

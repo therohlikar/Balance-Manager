@@ -11,6 +11,7 @@
 		962CC102296A0D0700E1F4C2 /* ProfileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 962CC101296A0D0700E1F4C2 /* ProfileModel.swift */; };
 		962CC104296A0D7200E1F4C2 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 962CC103296A0D7200E1F4C2 /* ProfileViewModel.swift */; };
 		962CC106296CA0DB00E1F4C2 /* SelectProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 962CC105296CA0DB00E1F4C2 /* SelectProfileView.swift */; };
+		969BA213296D6ABE005D8DDB /* ProfileFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 969BA212296D6ABE005D8DDB /* ProfileFormView.swift */; };
 		96E3CC352948A053002348CE /* Balance_ManagerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96E3CC342948A053002348CE /* Balance_ManagerApp.swift */; };
 		96E3CC392948A055002348CE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 96E3CC382948A055002348CE /* Assets.xcassets */; };
 		96E3CC3C2948A055002348CE /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 96E3CC3B2948A055002348CE /* Preview Assets.xcassets */; };
@@ -27,6 +28,7 @@
 		962CC101296A0D0700E1F4C2 /* ProfileModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileModel.swift; sourceTree = "<group>"; };
 		962CC103296A0D7200E1F4C2 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		962CC105296CA0DB00E1F4C2 /* SelectProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectProfileView.swift; sourceTree = "<group>"; };
+		969BA212296D6ABE005D8DDB /* ProfileFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileFormView.swift; sourceTree = "<group>"; };
 		96E3CC312948A053002348CE /* Balance Manager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Balance Manager.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		96E3CC342948A053002348CE /* Balance_ManagerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Balance_ManagerApp.swift; sourceTree = "<group>"; };
 		96E3CC382948A055002348CE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -96,6 +98,7 @@
 				96E3CC4C2948B844002348CE /* BalanceRowDetailView.swift */,
 				962CC0FF2968895D00E1F4C2 /* ProfileSideMenuView.swift */,
 				962CC105296CA0DB00E1F4C2 /* SelectProfileView.swift */,
+				969BA212296D6ABE005D8DDB /* ProfileFormView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -192,6 +195,7 @@
 				96E3CC492948A8F6002348CE /* BalanceRowView.swift in Sources */,
 				96E3CC352948A053002348CE /* Balance_ManagerApp.swift in Sources */,
 				962CC104296A0D7200E1F4C2 /* ProfileViewModel.swift in Sources */,
+				969BA213296D6ABE005D8DDB /* ProfileFormView.swift in Sources */,
 				962CC1002968895D00E1F4C2 /* ProfileSideMenuView.swift in Sources */,
 				96E3CC502948C4BA002348CE /* BalanceViewModel.swift in Sources */,
 				96E3CC4B2948A9A3002348CE /* FinalizedBalanceView.swift in Sources */,

@@ -147,5 +147,8 @@ class BalanceViewModel:ObservableObject{
     func clearAdditions(){
         self.finalBalance = 0
         self.additions = []
+        
+        saveAdditions()
+        recalculateAdditions()
     }
 }

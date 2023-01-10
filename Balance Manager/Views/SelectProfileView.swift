@@ -10,19 +10,20 @@ import SwiftUI
 struct SelectProfileView: View {
     @EnvironmentObject var profileViewModel: ProfileViewModel
     @State var hasProfile: Bool = false
+    @State var isCreatingNewProfile: Bool = false
     
     var body: some View {
         NavigationView{
             VStack{
-                if hasProfile {
+                if profileViewModel.profiles.count > 0 {
                     ScrollView{
-                        ForEach(profileViewModel.getCurrentProfileList()) { profile in
+                        ForEach(profileViewModel.profiles) { profile in
                             NavigationLink {
                                 //open profile's balance
                                 BalanceView(balanceViewModel: BalanceViewModel(profile: profile))
                             } label: {
                                 HStack{
-                                    Image(systemName: "person.fill")
+                                    Image(systemName: profile.icon)
                                         .foregroundColor(.black)
                                         .cornerRadius(40)
                                         .background(
@@ -31,6 +32,7 @@ struct SelectProfileView: View {
                                                 .frame(width: 30, height: 30)
                                         )
                                         .padding()
+                                        .frame(width: 50, height: 50)
                                     
                                     Spacer()
                                     
@@ -62,18 +64,17 @@ struct SelectProfileView: View {
                 Spacer()
                 
                 Button(action: {
-                    // open sheet with creating profile view
+                    isCreatingNewProfile.toggle()
                 }, label: {
                     Text("Create new profile")
                 })
                 
             }
-            .onAppear{
-                hasProfile = profileViewModel.getCurrentProfileList().count > 0
-            }
-            
         }
         .navigationBarBackButtonHidden()
+        .fullScreenCover(isPresented: $isCreatingNewProfile, content: {
+            ProfileFormView()
+        })
     }
     
 }
