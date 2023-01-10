@@ -9,15 +9,13 @@ import SwiftUI
 
 @main
 struct Balance_ManagerApp: App {
-    
-    @StateObject var balanceViewModel: BalanceViewModel = BalanceViewModel()
     @StateObject var profileViewModel: ProfileViewModel = ProfileViewModel()
     
     var body: some Scene {
         WindowGroup {
-            BalanceView()
-                .environmentObject(balanceViewModel)
+            SelectProfileView()
                 .environmentObject(profileViewModel)
+                .preferredColorScheme(.dark)
         }
     }
 }

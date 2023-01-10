@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct FinalizedBalanceView: View {
-    @EnvironmentObject var balanceViewModel: BalanceViewModel
     @State var isCreatingNew: Bool = false
+    @ObservedObject var balanceViewModel: BalanceViewModel
 
     var body: some View {
         HStack(alignment: .center){
@@ -28,14 +28,13 @@ struct FinalizedBalanceView: View {
         }
         .font(.title)
         .fullScreenCover(isPresented: $isCreatingNew, content: {
-            BalanceRowDetailView(currentAddition: AdditionModel(subject: "Unnamed Payment", date: .now, amount: 0, isLocked: false), new: true)
+            BalanceRowDetailView(balanceViewModel: balanceViewModel, currentAddition: AdditionModel(subject: "Unnamed Payment", date: .now, amount: 0, isLocked: false), new: true)
         })
     }
 }
 
 struct FinalizedBalanceView_Previews: PreviewProvider {
     static var previews: some View {
-        FinalizedBalanceView()
-            .environmentObject(BalanceViewModel())
+        FinalizedBalanceView(balanceViewModel: BalanceViewModel(profile: ProfileModel(nickname: "NONAME", icon: "person.fill")))
     }
 }

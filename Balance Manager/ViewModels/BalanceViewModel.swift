@@ -8,9 +8,15 @@
 import Foundation
 
 class BalanceViewModel:ObservableObject{
-    init(){
-        //getAdditions()
-        getAdditions_Test()
+    var profileConnected: ProfileModel
+    var balanceKey:String
+    
+    init(profile: ProfileModel){
+        balanceKey = "additions_list_\(profile.nickname.lowercased())"
+        profileConnected = profile
+        
+        getAdditions()
+        //getAdditions_Test()
     }
     
     enum SortAndFilter{
@@ -28,14 +34,13 @@ class BalanceViewModel:ObservableObject{
         }
     }
     
+    
     @Published var finalBalance : Int = 0
     @Published var currentSorting: SortAndFilter = .dateFrom {
         didSet {
             sortAdditions(by: currentSorting)
         }
     }
-    
-    var balanceKey:String = "additions_list"
 
     func getAdditions_Test(){
         let testAdditions: [AdditionModel] = [
@@ -48,9 +53,7 @@ class BalanceViewModel:ObservableObject{
         ]
         
         self.additions = testAdditions
-
         sortAdditions(by: currentSorting)
-        
         recalculateAdditions()
     }
     
@@ -62,7 +65,6 @@ class BalanceViewModel:ObservableObject{
         
         self.additions = savedAdditions
         sortAdditions(by: .dateFrom)
-        
         recalculateAdditions()
     }
     
@@ -132,7 +134,7 @@ class BalanceViewModel:ObservableObject{
         
         return tempAdditions
     }
-    
+
     func recalculateAdditions(){
         var newBalance:Int = 0
         for addition in additions {

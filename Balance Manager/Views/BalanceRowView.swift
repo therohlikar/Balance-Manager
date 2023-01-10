@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct BalanceRowView: View {
-    
+    @StateObject var balanceViewModel: BalanceViewModel
     var currentAddition: AdditionModel
     @State var isShowingDetail: Bool = false
     
@@ -36,7 +36,7 @@ struct BalanceRowView: View {
             }
         }
         .sheet(isPresented: $isShowingDetail, content: {
-            BalanceRowDetailView(currentAddition: currentAddition)
+            BalanceRowDetailView(balanceViewModel: balanceViewModel, currentAddition: currentAddition)
         })
         .onTapGesture {
             isShowingDetail.toggle()
@@ -48,6 +48,6 @@ struct BalanceRowView: View {
 
 struct BalanceRowView_Previews: PreviewProvider {
     static var previews: some View {
-        BalanceRowView(currentAddition: AdditionModel(subject: "Test", date: .now, amount: 500, isLocked: false))
+        BalanceRowView(balanceViewModel: BalanceViewModel(profile: ProfileModel(nickname: "NONAME", icon: "person.fill")), currentAddition: AdditionModel(subject: "Test", date: .now, amount: 500, isLocked: false))
     }
 }

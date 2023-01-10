@@ -9,70 +9,79 @@ import SwiftUI
 
 struct SelectProfileView: View {
     @EnvironmentObject var profileViewModel: ProfileViewModel
-    @State var hasProfile: Bool
+    @State var hasProfile: Bool = false
     
     var body: some View {
-        VStack{
-            if profileViewModel.getCurrentProfileList().count > 0 {
-                ScrollView{
-                    ForEach(profileViewModel.getCurrentProfileList()) { profile in
-                        HStack{
-                            Image(systemName: "person.fill")
-                                .foregroundColor(.black)
-                                .cornerRadius(40)
-                                .background(
-                                    RoundedRectangle(cornerRadius: 100)
+        NavigationView{
+            VStack{
+                if hasProfile {
+                    ScrollView{
+                        ForEach(profileViewModel.getCurrentProfileList()) { profile in
+                            NavigationLink {
+                                //open profile's balance
+                                BalanceView(balanceViewModel: BalanceViewModel(profile: profile))
+                            } label: {
+                                HStack{
+                                    Image(systemName: "person.fill")
+                                        .foregroundColor(.black)
+                                        .cornerRadius(40)
+                                        .background(
+                                            RoundedRectangle(cornerRadius: 100)
+                                                .foregroundColor(Color("AccentColor"))
+                                                .frame(width: 30, height: 30)
+                                        )
+                                        .padding()
+                                    
+                                    Spacer()
+                                    
+                                    Text(profile.nickname.uppercased())
                                         .foregroundColor(Color("AccentColor"))
-                                        .frame(width: 30, height: 30)
-                                )
-                                .padding()
-                            
-                            Spacer()
-                            
-                            Text(profile.nickname.uppercased())
-                                .foregroundColor(Color("AccentColor"))
-                            
-                            Spacer()
-                            
-                            Image(systemName: "arrow.right")
+                                    
+                                    Spacer()
+                                    
+                                    Image(systemName: "arrow.right")
+                                }
+                                .font(.headline)
+                                .padding(.horizontal, 30)
+                                .opacity(0.85)
+                            }
                         }
-                        .font(.headline)
-                        .padding(.horizontal, 30)
-                        .opacity(0.85)
-                        .onTapGesture {
-                            //select new profile
-                        }
+                        
                     }
-                    
+                    .padding(.vertical, 40)
+                }else{
+                    Spacer()
+                    VStack{
+                        Text("There is no profile created yet. ")
+                        Text("Click on the button below to create one.")
+                    }
+                    .padding(40)
+                    .font(.headline)
                 }
-                .padding(.vertical, 40)
-            }else{
+                
                 Spacer()
-                VStack{
-                    Text("There is no profile created yet. ")
-                    Text("Click on the button below to create one.")
-                }
-                .padding(40)
-                .font(.headline)
+                
+                Button(action: {
+                    // open sheet with creating profile view
+                }, label: {
+                    Text("Create new profile")
+                })
+                
+            }
+            .onAppear{
+                hasProfile = profileViewModel.getCurrentProfileList().count > 0
             }
             
-            Spacer()
-            
-            Button(action: {
-                // open sheet with creating profile view
-            }, label: {
-                Text("Create new profile")
-            })
         }
-        .navigationBarBackButtonHidden(!hasProfile)
+        .navigationBarBackButtonHidden()
     }
     
 }
 
 struct SelectProfileView_Previews: PreviewProvider {
     static var previews: some View {
-        SelectProfileView(hasProfile: false)
-            .environmentObject(BalanceViewModel())
+        SelectProfileView()
             .environmentObject(ProfileViewModel())
+            .preferredColorScheme(.dark)
     }
 }

@@ -18,7 +18,7 @@ struct ProfileSideMenuView: View {
                 VStack(alignment: .center){
                     
                     NavigationLink(destination:{
-                        SelectProfileView(hasProfile: true)
+                        SelectProfileView()
                     },label: {
                         VStack{
                             Image(systemName: "person.fill")
@@ -32,7 +32,7 @@ struct ProfileSideMenuView: View {
                                 )
                                 .padding()
 
-                            Text("Michael's Profile")
+                            Text("\(profileViewModel.getCurrentProfile().nickname)'s Profile")
                                 .foregroundColor(Color("AccentColor"))
                                 .font(.title)
                         }
@@ -84,5 +84,6 @@ struct ProfileSideMenuView: View {
                     .opacity(0.75)
             }
         }
+        .navigationBarBackButtonHidden()
     }
 }

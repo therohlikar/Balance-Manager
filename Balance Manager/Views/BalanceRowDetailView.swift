@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct BalanceRowDetailView: View {
-    @EnvironmentObject var balanceViewModel: BalanceViewModel
+    @ObservedObject var balanceViewModel: BalanceViewModel
     @Environment(\.dismiss) var dismiss
     var currentAddition: AdditionModel
     var new:Bool = false
@@ -146,6 +146,6 @@ struct BalanceRowDetailView: View {
 
 struct BalanceRowDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        BalanceRowDetailView(currentAddition: AdditionModel(subject: "Test", date: .now, amount: 500, isLocked: false))
+        BalanceRowDetailView(balanceViewModel: BalanceViewModel(profile: ProfileModel(nickname: "NONAME", icon: "person.fill")), currentAddition: AdditionModel(subject: "Test", date: .now, amount: 500, isLocked: false))
     }
 }
