@@ -15,6 +15,15 @@ struct BalanceRowView: View {
     var body: some View {
         HStack{
             HStack{
+                Image(systemName: currentAddition.category.icon)
+                    .foregroundColor(.white)
+                    .font(.caption)
+                    .background(
+                        RoundedRectangle(cornerRadius: 100)
+                            .foregroundColor(Color(currentAddition.category.color))
+                            .frame(width: 30, height: 30)
+                    )
+                    .padding()
                 Text(currentAddition.subject)
                     .fontWeight(currentAddition.isLocked ? .bold : .regular)
                 Image(systemName: "ellipsis.circle")
@@ -48,6 +57,7 @@ struct BalanceRowView: View {
 
 struct BalanceRowView_Previews: PreviewProvider {
     static var previews: some View {
-        BalanceRowView(balanceViewModel: BalanceViewModel(profile: ProfileModel(nickname: "NONAME", icon: "person.fill")), currentAddition: AdditionModel(subject: "Test", date: .now, amount: 500, isLocked: false))
+        BalanceRowView(balanceViewModel: BalanceViewModel(profile: ProfileModel(nickname: "NONAME", icon: "person.fill")), currentAddition: AdditionModel(subject: "Test", category: CategoryModel(name: "groceries", icon: "basket.fill", color: "cat_groceries", paymentName: nil), date: .now, amount: 500, isLocked: false))
+            .preferredColorScheme(.dark)
     }
 }

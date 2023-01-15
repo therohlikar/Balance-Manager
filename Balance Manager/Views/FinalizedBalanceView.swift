@@ -10,6 +10,7 @@ import SwiftUI
 struct FinalizedBalanceView: View {
     @State var isCreatingNew: Bool = false
     @ObservedObject var balanceViewModel: BalanceViewModel
+    var categoryViewModel: CategoryViewModel = CategoryViewModel()
 
     var body: some View {
         HStack(alignment: .center){
@@ -28,7 +29,7 @@ struct FinalizedBalanceView: View {
         }
         .font(.title)
         .fullScreenCover(isPresented: $isCreatingNew, content: {
-            BalanceRowDetailView(balanceViewModel: balanceViewModel, currentAddition: AdditionModel(subject: "", date: .now, amount: 0, isLocked: false), new: true)
+            BalanceRowDetailView(balanceViewModel: balanceViewModel, currentAddition: AdditionModel(subject: "GROCERIES", category: categoryViewModel.getCategoryByName(name: "groceries"), date: .now, amount: 0, isLocked: false), new: true)
         })
     }
 }

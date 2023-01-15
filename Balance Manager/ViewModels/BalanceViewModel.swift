@@ -44,12 +44,12 @@ class BalanceViewModel:ObservableObject{
 
     func getAdditions_Test(){
         let testAdditions: [AdditionModel] = [
-            AdditionModel(subject: "One", date: .now, amount: 500, isLocked: false),
-            AdditionModel(subject: "Two", date: .now, amount: -785, isLocked: true),
-            AdditionModel(subject: "Three", date: .now, amount: 223, isLocked: true),
-            AdditionModel(subject: "Four", date: Date.now.addingTimeInterval(86400), amount: 566, isLocked: false),
-            AdditionModel(subject: "Five", date: .now, amount: -212, isLocked: false),
-            AdditionModel(subject: "Six", date: .now, amount: 221, isLocked: false),
+            AdditionModel(subject: "One", category: CategoryModel(name: "groceries", icon: "basket.fill", color: "cat_groceries", paymentName: nil), date: .now, amount: 500, isLocked: false),
+            AdditionModel(subject: "Two", category: CategoryModel(name: "groceries", icon: "basket.fill", color: "cat_groceries", paymentName: nil), date: .now, amount: -785, isLocked: true),
+            AdditionModel(subject: "Three", category: CategoryModel(name: "groceries", icon: "basket.fill", color: "cat_groceries", paymentName: nil), date: .now, amount: 223, isLocked: true),
+            AdditionModel(subject: "Four", category: CategoryModel(name: "groceries", icon: "basket.fill", color: "cat_groceries", paymentName: nil), date: Date.now.addingTimeInterval(86400), amount: 566, isLocked: false),
+            AdditionModel(subject: "Five", category: CategoryModel(name: "groceries", icon: "basket.fill", color: "cat_groceries", paymentName: nil), date: .now, amount: -212, isLocked: false),
+            AdditionModel(subject: "Six", category: CategoryModel(name: "groceries", icon: "basket.fill", color: "cat_groceries", paymentName: nil), date: .now, amount: 221, isLocked: false),
         ]
         
         self.additions = testAdditions

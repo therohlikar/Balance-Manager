@@ -70,7 +70,7 @@ struct BalanceView: View {
                             }
                             .swipeActions(edge: .leading) {
                                 Button {
-                                    balanceViewModel.updateAddition(addition: addition, newAddition: AdditionModel(subject: addition.subject, date: addition.date, amount: addition.amount, isLocked: !addition.isLocked))
+                                    balanceViewModel.updateAddition(addition: addition, newAddition: AdditionModel(subject: addition.subject, category: addition.category, date: addition.date, amount: addition.amount, isLocked: !addition.isLocked))
                                 } label: {
                                     Image(systemName: (addition.isLocked ? "lock.open" : "lock"))
                                 }

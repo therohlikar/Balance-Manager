@@ -9,25 +9,18 @@ import SwiftUI
 
 struct BalanceRowDetailView: View {
     @ObservedObject var balanceViewModel: BalanceViewModel
+    var categoryViewModel: CategoryViewModel = CategoryViewModel()
     @Environment(\.dismiss) var dismiss
     var currentAddition: AdditionModel
     var new:Bool = false
     
     @State var subject: String = ""
+    @State var selectedCategory: CategoryModel = CategoryModel(name: "groceries", icon: "basket.fill", color: "cat_groceries", paymentName: nil)
     @State var date: Date = Date.now
     @State var amount: String = "0"
     @State var locked: Bool = false
     
     @FocusState var amountFocused: Bool
-    
-//    var dateFormatter: DateFormatter{
-//        let formatter = DateFormatter()
-//
-//        formatter.dateStyle = .short
-//        formatter.timeStyle = .full
-//
-//        return formatter
-//    }
     
     var body: some View {
         VStack{
@@ -67,13 +60,41 @@ struct BalanceRowDetailView: View {
                 .font(.largeTitle)
             
                 VStack(alignment: .leading){
+                    LazyVGrid(columns: [
+                        GridItem(.adaptive(minimum: 80))
+                    ], spacing: 20){
+                        ForEach(categoryViewModel.categories) { category in
+                            VStack{
+                                Image(systemName: "\(category.icon)")
+                                    .foregroundColor(selectedCategory.name == category.name ? .black : .white)
+                                    .cornerRadius(40)
+                                    .background(
+                                        RoundedRectangle(cornerRadius: 100)
+                                            .foregroundColor(selectedCategory.name == category.name ? .white : Color(category.color))
+                                            .frame(width: 40, height: 40)
+                                    )
+                                    .padding()
+                                    .onTapGesture(count: 1) {
+                                        subject = category.paymentName
+                                        selectedCategory = category
+                                    }
+                                Text(category.name.uppercased())
+                                    .font(.caption2)
+                            }
+                        }
+                    }
+                }
+                .padding(3)
+                
+                VStack(alignment: .leading){
                     Text("What's the transaction about?")
                     
                     TextField("Current: \(currentAddition.subject)", text: $subject)
                         .multilineTextAlignment(.center)
+                        .textCase(.uppercase)
                 }
                 .padding(3)
-                
+
                 VStack(alignment: .leading){
                     Text("Date of transaction?")
                     
@@ -105,7 +126,7 @@ struct BalanceRowDetailView: View {
             
             HStack{
                 Button {
-                    balanceViewModel.updateAddition(addition: currentAddition, newAddition: AdditionModel(subject: subject, date: date, amount: Int(amount) ?? 0, isLocked: locked))
+                    balanceViewModel.updateAddition(addition: currentAddition, newAddition: AdditionModel(subject: subject.uppercased(), category: selectedCategory, date: date, amount: Int(amount) ?? 0, isLocked: locked))
                     
                     dismiss()
                 } label: {
@@ -137,6 +158,7 @@ struct BalanceRowDetailView: View {
         .padding(5)
         .onAppear{
             subject = currentAddition.subject
+            selectedCategory = currentAddition.category
             date = currentAddition.date
             amount = String(currentAddition.amount)
             locked = currentAddition.isLocked
@@ -146,7 +168,7 @@ struct BalanceRowDetailView: View {
 
 struct BalanceRowDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        BalanceRowDetailView(balanceViewModel: BalanceViewModel(profile: ProfileModel(nickname: "NONAME", icon: "person.fill")), currentAddition: AdditionModel(subject: "Test", date: .now, amount: 500, isLocked: false))
+        BalanceRowDetailView(balanceViewModel: BalanceViewModel(profile: ProfileModel(nickname: "NONAME", icon: "person.fill")), currentAddition: AdditionModel(subject: "GROCERIES", category: CategoryModel(name: "groceries", icon: "basket.fill", color: "cat_groceries", paymentName: nil), date: .now, amount: 500, isLocked: false))
             .preferredColorScheme(.dark)
     }
 }
