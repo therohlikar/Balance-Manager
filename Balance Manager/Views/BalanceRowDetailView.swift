@@ -88,7 +88,7 @@ struct BalanceRowDetailView: View {
                 .padding(3)
 
                 VStack(alignment: .leading){
-                    Text("Lock transaction?")
+                    Text("Lock transaction from being cleared?")
 
                     HStack{
                         Spacer()

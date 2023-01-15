@@ -28,7 +28,7 @@ struct FinalizedBalanceView: View {
         }
         .font(.title)
         .fullScreenCover(isPresented: $isCreatingNew, content: {
-            BalanceRowDetailView(balanceViewModel: balanceViewModel, currentAddition: AdditionModel(subject: "Unnamed Payment", date: .now, amount: 0, isLocked: false), new: true)
+            BalanceRowDetailView(balanceViewModel: balanceViewModel, currentAddition: AdditionModel(subject: "", date: .now, amount: 0, isLocked: false), new: true)
         })
     }
 }
