@@ -58,7 +58,7 @@ struct BalanceView: View {
                 
                 
                 List{
-                    ForEach(balanceViewModel.getCurrentAdditions()){ addition in
+                    ForEach(balanceViewModel.formFilteredArray()){ addition in
                         BalanceRowView(balanceViewModel: balanceViewModel, currentAddition: addition)
                             .swipeActions(edge: .trailing) {
                                 Button {

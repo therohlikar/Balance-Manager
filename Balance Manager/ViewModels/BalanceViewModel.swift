@@ -119,7 +119,7 @@ class BalanceViewModel:ObservableObject{
         }
     }
     
-    func getCurrentAdditions() -> [AdditionModel]{
+    func formFilteredArray() -> [AdditionModel]{
         var tempAdditions: [AdditionModel] = self.additions
         
         if self.currentSorting == .onlyNegative {
@@ -145,8 +145,9 @@ class BalanceViewModel:ObservableObject{
     }
     
     func clearAdditions(){
-        self.finalBalance = 0
-        self.additions = []
+        self.additions.removeAll { addition in
+            addition.isLocked == false
+        }
         
         saveAdditions()
         recalculateAdditions()
